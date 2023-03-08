@@ -1,5 +1,4 @@
 import './App.css';
-import { Cards } from './data/cards';
 
 function App() {
   return (
