@@ -1,0 +1,20 @@
+.cards-item, .cards-img {
+    width: 400px;
+}
+.cards-name {
+    color: blue;
+    font-size: 18px;
+}
+
+.cards-item {
+    border: 1px solid black;
+}
+/* .cards-desc {
+
+} */
+.title-container {
+    width: 95%;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}

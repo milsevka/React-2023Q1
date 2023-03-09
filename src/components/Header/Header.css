@@ -1,0 +1,11 @@
+.header-link-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    list-style-type: none;
+    gap: 20px;
+}
+.header-link-item {
+    list-style-type: none;
+}

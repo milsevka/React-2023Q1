@@ -1,14 +1,21 @@
 import React from 'react';
 import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
+import { CardList } from '../../components/CardsList/CardList';
 
-export class HomePage extends React.Component {
+import './HomePage.css';
+import { IHomePage } from '../../types/types';
+
+export class HomePage extends React.Component<IHomePage> {
+  constructor(props: IHomePage) {
+    super(props);
+  }
   render() {
     return (
-      <div>
+      <div className="main-wrapper">
         <Header />
         <h1>Home Page</h1>
-        <p>Hello, this is main Page</p>
+        <CardList cards={this.props.cards} />
         <Footer />
       </div>
     );
