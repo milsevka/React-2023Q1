@@ -4,10 +4,11 @@ import { Footer } from '../../components/Footer/Footer';
 import { CardList } from '../../components/CardsList/CardList';
 
 import './HomePage.css';
-import { IHomePage } from '../../types/types';
+import { ICardsArray } from '../../types/types';
+import { Search } from '../../components/Search/Search';
 
-export class HomePage extends React.Component<IHomePage> {
-  constructor(props: IHomePage) {
+export class HomePage extends React.Component<ICardsArray> {
+  constructor(props: ICardsArray) {
     super(props);
   }
   render() {
@@ -15,6 +16,7 @@ export class HomePage extends React.Component<IHomePage> {
       <div className="main-wrapper">
         <Header />
         <h1>Home Page</h1>
+        <Search />
         <CardList cards={this.props.cards} />
         <Footer />
       </div>

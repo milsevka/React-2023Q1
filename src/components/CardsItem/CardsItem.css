@@ -1,17 +1,19 @@
 .cards-item, .cards-img {
     width: 400px;
 }
+
 .cards-name {
-    color: blue;
-    font-size: 18px;
+    color: rgb(190, 190, 234);
 }
 
 .cards-item {
-    border: 1px solid black;
+    background-color: rgb(47, 82, 143);
+    padding: 10px;
+    -webkit-box-shadow: 8px 7px 8px 0px rgba(34, 60, 80, 0.2);
+    -moz-box-shadow: 8px 7px 8px 0px rgba(34, 60, 80, 0.2);
+    box-shadow: 8px 7px 8px 0px rgba(34, 60, 80, 0.2);
 }
-/* .cards-desc {
 
-} */
 .title-container {
     width: 95%;
     align-items: center;

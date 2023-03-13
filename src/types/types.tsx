@@ -1,12 +1,14 @@
-export interface ICardList {
+export interface ICardsArray {
   cards?: ICard[];
 }
-export interface IHomePage {
-  cards?: ICard[];
-}
+
 export interface ICards {
   card: ICard;
 }
+
+export type ISearch = {
+  search: string;
+};
 
 export interface ICard {
   id: number;
