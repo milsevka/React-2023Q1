@@ -3,7 +3,6 @@ import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 import { CardList } from '../../components/CardsList/CardList';
 
-import './HomePage.css';
 import '../../App.css';
 
 import { ICardsArray } from '../../types/types';

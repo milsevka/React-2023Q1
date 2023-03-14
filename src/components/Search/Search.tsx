@@ -1,7 +1,7 @@
 import React from 'react';
 import { ISearch } from '../../types/types';
 import './Search.css';
-// eslint-disable-next-line @typescript-eslint/ban-types
+
 export class Search extends React.Component<{}, { search: string }> {
   constructor(props: ISearch) {
     super(props);
