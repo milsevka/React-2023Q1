@@ -3,16 +3,19 @@ import { Header } from '../../components/Header/Header';
 import { Footer } from '../../components/Footer/Footer';
 
 import '../HomePage/HomePage.css';
+import '../../App.css';
 
 export class NotFoundPage extends React.Component {
   render() {
     return (
-      <div className="main-wrapper">
+      <>
         <Header />
-        <h1>Not Found Page</h1>
-        <img src={require('../../assets/cards/404.jpg')} />
+        <div className="main">
+          <h1 className="page-title">Not Found Page</h1>
+          <img src={require('../../assets/cards/404.jpg')} />
+        </div>
         <Footer />
-      </div>
+      </>
     );
   }
 }

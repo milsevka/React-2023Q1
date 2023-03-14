@@ -1,3 +1,8 @@
+.header {
+    padding: 2%;
+    min-height: 10vh;
+}
+
 .header-link-container {
     display: flex;
     flex-direction: row;
@@ -9,5 +14,4 @@
 .header-link-item {
     list-style-type: none;
     font-size: 20px;
-    color: black;
 }

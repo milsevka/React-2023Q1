@@ -4,6 +4,8 @@ import { Footer } from '../../components/Footer/Footer';
 import { CardList } from '../../components/CardsList/CardList';
 
 import './HomePage.css';
+import '../../App.css';
+
 import { ICardsArray } from '../../types/types';
 import { Search } from '../../components/Search/Search';
 
@@ -13,13 +15,15 @@ export class HomePage extends React.Component<ICardsArray> {
   }
   render() {
     return (
-      <div className="main-wrapper">
+      <>
         <Header />
-        <h1>Home Page</h1>
-        <Search />
-        <CardList cards={this.props.cards} />
+        <main className="main">
+          <h1 className="page-title">Home Page</h1>
+          <Search />
+          <CardList cards={this.props.cards} />
+        </main>
         <Footer />
-      </div>
+      </>
     );
   }
 }

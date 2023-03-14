@@ -1,5 +1,6 @@
-.footer-container {
+.footer {
     display: flex;
     justify-content: center;
-    align-content: center;
+    padding: 2%;
+    min-height: 5vh;
 }
