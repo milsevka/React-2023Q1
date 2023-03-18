@@ -7,8 +7,8 @@ const card = {
   id: 2,
   name: 'Cat',
   title: '100',
-  src: '',
-  description: 'meow',
+  src: 'src',
+  description: 'meow meow meow',
 };
 
 describe('render card', () => {

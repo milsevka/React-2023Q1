@@ -8,15 +8,15 @@ const cardArray = [
     id: 2,
     name: 'Cat',
     title: '100',
-    src: '',
+    src: 'cat src',
     description: 'meow',
   },
   {
     id: 3,
-    name: 'Cat',
-    title: '100',
-    src: '',
-    description: 'meow',
+    name: 'Dog',
+    title: '101',
+    src: 'dog src',
+    description: 'woof',
   },
 ];
 
