@@ -34,6 +34,19 @@ export class Header extends React.Component {
               About Page
             </NavLink>
           </li>
+          <li className="header-link-item">
+            <NavLink
+              to="/form"
+              style={({ isActive }) => ({
+                color: isActive ? '#1d66ab' : '#d5e1ec',
+                background: isActive ? '#a0bdd880' : 'transparent',
+                padding: '5px',
+                borderRadius: '10px',
+              })}
+            >
+              Form Page
+            </NavLink>
+          </li>
         </ul>
       </header>
     );
