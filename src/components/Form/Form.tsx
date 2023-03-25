@@ -76,9 +76,21 @@ export class Form extends React.Component<FormProps, FormState> {
 
   openModal = () => {
     this.setState({ modal: true });
+    this.resetForms();
     setTimeout(() => {
       this.setState({ modal: false });
     }, 1000);
+  };
+
+  resetForms = () => {
+    this.name.current!.value = '';
+    this.nameParent.current!.value = '';
+    this.birthday.current!.value = '';
+    this.color.current!.value = 'choose one';
+    this.male.current!.checked = false;
+    this.female.current!.checked = false;
+    this.checked.current!.checked = false;
+    this.photo.current!.value = '';
   };
 
   validatePhoto = (file: File) => {
