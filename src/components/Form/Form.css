@@ -4,12 +4,15 @@
     justify-content: center;
     align-items: center;
     gap: 20px;
-    background-color: rgba(25, 98, 165, 0.502);
-    padding: 50px;
+    background-color: rgba(16, 53, 88, 0.8);
+    padding: 10px;
 }
 .input-container {
     display: flex;
-    gap: 10px;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .switch-container {
@@ -39,4 +42,7 @@ button:focus {
     gap: 20px;
     flex-wrap: wrap;
     margin-top: 20px;
+}
+.error-title {
+    color: rgb(199, 118, 118);
 }

@@ -1,34 +1,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import { FormCard } from './FormCard';
+import { CardCat } from '../../types/types';
 
 import '../../App.css';
 import './Form.css';
+import { FormProps, FormState, ErrorsTitle } from '../../types/types';
 
-type FormProps = {
-  props?: null;
-};
-export interface CardCat {
-  id: number;
-  name: string;
-  nameParent: string;
-  birthday: string;
-  color: string;
-  gender: string;
-  photo: File;
-}
-type FormType = {
-  name: string;
-  nameParent: string;
-  birthday: string;
-  checked: boolean;
-  color: string;
-  male: string;
-  photo: string;
-  cards: CardCat[];
-};
-
-export class Form extends React.Component<FormProps, FormType> {
+export class Form extends React.Component<FormProps, FormState> {
   private name = React.createRef<HTMLInputElement>();
   private nameParent = React.createRef<HTMLInputElement>();
   private birthday = React.createRef<HTMLInputElement>();
@@ -41,33 +20,23 @@ export class Form extends React.Component<FormProps, FormType> {
   constructor(props: FormProps) {
     super(props);
     this.state = {
-      name: '',
-      nameParent: '',
-      birthday: '',
-      color: '',
-      photo: '',
-      checked: false,
-      male: '',
       cards: [],
+      validate: false,
+      modal: false,
     };
   }
 
-  onInputChange = (event: React.FormEvent<HTMLInputElement>) => {
-    this.setState({ ...this.state, [event.currentTarget.name]: event.currentTarget.value });
+  errors: ErrorsTitle = {
+    name: false,
+    nameParent: false,
+    birthday: false,
+    color: false,
+    photo: false,
+    gender: false,
+    checked: false,
   };
 
-  onSelectChange = (event: React.FormEvent<HTMLSelectElement>) => {
-    this.setState({ ...this.state, [event.currentTarget.name]: event.currentTarget.value });
-  };
-
-  onInputAgree = () => {
-    this.setState({ ...this.state, checked: !this.state.checked });
-  };
-  onPhotoChange = (event: React.FormEvent<HTMLInputElement>) => {
-    this.setState({ ...this.state, photo: event.currentTarget.value.split(`\\`).pop() || '' });
-  };
-
-  handleSubmit = (e: React.FormEvent<EventTarget>) => {
+  formSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
     const id = this.state.cards.length + 1;
     const name = this.name.current!.value;
@@ -75,107 +44,173 @@ export class Form extends React.Component<FormProps, FormType> {
     const birthday = this.birthday.current!.value;
     const color = this.color.current!.value;
     const male = this.male.current!.checked;
+    const female = this.female.current!.checked;
+    const checked = this.checked.current!.checked;
     const photo = this.photo.current!.files![0];
-    const gender = male ? 'male' : 'female';
+    const gender = this.checkGender(male, female);
+    const agree = checked ? 'agree' : '';
 
     const newCard = { id, name, nameParent, birthday, color, gender, photo };
 
-    this.setState({ cards: [...this.state.cards, newCard] });
+    this.validate('name', name);
+    this.validate('nameParent', nameParent);
+    this.validate('birthday', birthday);
+    this.validate('color', color);
+    this.validate('gender', gender);
+    this.validatePhoto(photo);
+    this.validate('checked', agree);
+
+    this.validateTrue(newCard);
+  };
+
+  validateTrue = (card: CardCat) => {
+    const values = Object.values(this.errors);
+    if (values.every((elem) => !elem)) {
+      this.setState({ validate: true });
+      this.setState({ cards: [...this.state.cards, card] });
+      this.openModal();
+    } else {
+      this.setState({ validate: false });
+    }
+  };
+
+  openModal = () => {
+    this.setState({ modal: true });
+    setTimeout(() => {
+      this.setState({ modal: false });
+    }, 1000);
+  };
+
+  validatePhoto = (file: File) => {
+    this.errors.photo = file ? false : true;
+  };
+
+  checkGender = (male: boolean, female: boolean) => {
+    let gender = '';
+    if (male) {
+      gender = 'male';
+    } else if (female) {
+      gender = 'female';
+    } else {
+      gender = '';
+    }
+    return gender;
+  };
+
+  validate = (nameCase: string, testString: string) => {
+    switch (nameCase) {
+      case 'name': {
+        const nameReg = /^([A-ZА-Я])/;
+        this.errors.name = nameReg.test(testString) ? false : true;
+        break;
+      }
+      case 'nameParent': {
+        const nameParentReg = /^[a-zA-ZА-Яа-яЁё]{3,} (?:[a-zA-ZА-Яа-яЁё]{3,} *)+$/;
+        // /^([A-Z])[a-zA-ZА-Яа-яЁё]{3,} (?:[a-zA-ZА-Яа-яЁё]{3,} *)+$/gm
+        this.errors.nameParent = nameParentReg.test(testString) ? false : true;
+        break;
+      }
+      case 'birthday': {
+        const resultDate = Number(testString.split('-')[0]);
+        this.errors.birthday = resultDate < 2023 && testString ? false : true;
+        break;
+      }
+      case 'color': {
+        this.errors.color = testString !== 'choose one' ? false : true;
+        break;
+      }
+      case 'gender': {
+        this.errors.gender = testString ? false : true;
+        break;
+      }
+      case 'checked': {
+        this.errors.checked = testString ? false : true;
+        break;
+      }
+    }
   };
 
   render() {
-    const { name, nameParent, birthday, checked, color } = this.state;
     return (
       <main className="main">
         <form className="form-container">
           <h1 className="label-title">Add a cat card</h1>
           <div className="input-container">
             <label className="label-title">Cat name:</label>
-            <input
-              name="name"
-              type="text"
-              value={name}
-              ref={this.name}
-              onChange={this.onInputChange}
-            />
+            <input name="name" type="text" ref={this.name} />
+            {this.errors.name && (
+              <p className="error-title">
+                Please, consider that your name starts with a capital letter
+              </p>
+            )}
           </div>
           <div className="input-container">
             <label className="label-title">Owner name:</label>
-            <input
-              name="nameParent"
-              type="text"
-              value={nameParent}
-              ref={this.nameParent}
-              onChange={this.onInputChange}
-            />
+            <input name="nameParent" type="text" ref={this.nameParent} />
+            {this.errors.nameParent && (
+              <p className="error-title">
+                Please consider that your name must contain at least two words, each at least 3
+                characters long
+              </p>
+            )}
           </div>
           <div className="input-container">
             <label className="label-title">Date of birth of the cat:</label>
-            <input
-              name="birthday"
-              type="date"
-              value={birthday}
-              ref={this.birthday}
-              onChange={this.onInputChange}
-            />
+            <input name="birthday" type="date" ref={this.birthday} />
+            {this.errors.birthday && (
+              <p className="error-title">
+                Please fill in the date correctly. Year of birth cannot be more than 2023.
+              </p>
+            )}
           </div>
           <div className="input-container">
             <label htmlFor="select" className="label-title">
               Choose the color of the cat:
             </label>
-            <select
-              name="color"
-              id="select"
-              value={color}
-              ref={this.color}
-              onChange={this.onSelectChange}
-            >
-              <option>Meow</option>
+            <select name="color" id="select" ref={this.color}>
+              <option selected disabled>
+                choose one
+              </option>
               <option value="black">black</option>
               <option value="light">light</option>
               <option value="red">red</option>
               <option value="gray">gray</option>
               <option value="three-suited">three-suited</option>
             </select>
+            {this.errors.color && (
+              <p className="error-title">Please choose the color of the cat.</p>
+            )}
           </div>
           <div className="input-container">
             <div className="switch-container">
               <label className="label-title">Female</label>
-              <input
-                name="male"
-                type="radio"
-                value="female"
-                ref={this.female}
-                onChange={this.onInputChange}
-              />
+              <input name="male" type="radio" value="female" ref={this.female} />
               <label className="label-title">Male</label>
-              <input
-                name="male"
-                type="radio"
-                value="male"
-                ref={this.male}
-                onChange={this.onInputChange}
-              />
+              <input name="male" type="radio" value="male" ref={this.male} />
             </div>
+            {this.errors.gender && (
+              <p className="error-title">Please choose the gender of the cat.</p>
+            )}
           </div>
           <div className="input-container">
             <label className="label-title">Upload a photo of your cat</label>
-            <input type="file" name="photo" ref={this.photo} onChange={this.onPhotoChange} />
+            <input type="file" name="photo" ref={this.photo} />
+            {this.errors.photo && (
+              <p className="error-title">You must upload a photo of your cat</p>
+            )}
           </div>
           <div className="input-container">
             <label className="label-title">I agree to the processing of data</label>
-            <input
-              name="checked"
-              type="checkbox"
-              checked={checked}
-              ref={this.checked}
-              onChange={this.onInputAgree}
-            />
+            <input name="checked" type="checkbox" ref={this.checked} />
+            {this.errors.checked && (
+              <p className="error-title">You must agree to the processing of data</p>
+            )}
           </div>
-          <button className="button" onClick={this.handleSubmit}>
+          <button className="button" onClick={this.formSubmit}>
             Create card
           </button>
         </form>
+        {this.state.modal && <p className="label-title">Card for the cat created!</p>}
         <ul className="cards-list">
           {this.state.cards.map((card, id) => {
             return <FormCard key={id} {...card} />;

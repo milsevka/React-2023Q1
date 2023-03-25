@@ -1,5 +1,6 @@
 import React from 'react';
-import { CardCat } from './Form';
+import { CardCat } from '../../types/types';
+
 import '../CardsItem/CardsItem.css';
 
 export class FormCard extends React.Component<CardCat> {
