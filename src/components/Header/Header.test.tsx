@@ -14,5 +14,6 @@ describe('render header layout', () => {
     expect(screen.getByText(/Home Page/i)).toBeInTheDocument();
     expect(screen.getByText(/About Page/i)).toBeInTheDocument();
     expect(screen.getByText(/Form Page/i)).toBeInTheDocument();
+    expect(screen.getAllByRole('link')).toHaveLength(3);
   });
 });
