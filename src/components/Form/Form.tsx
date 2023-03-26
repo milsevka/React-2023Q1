@@ -112,13 +112,12 @@ export class Form extends React.Component<FormProps, FormState> {
   validate = (nameCase: string, testString: string) => {
     switch (nameCase) {
       case 'name': {
-        const nameReg = /^([A-ZА-Я])/;
+        const nameReg = /^([A-ZА-ЯЁ])/;
         this.errors.name = nameReg.test(testString) ? false : true;
         break;
       }
       case 'nameParent': {
-        const nameParentReg = /^[a-zA-ZА-Яа-яЁё]{3,} (?:[a-zA-ZА-Яа-яЁё]{3,} *)+$/;
-        // /^([A-Z])[a-zA-ZА-Яа-яЁё]{3,} (?:[a-zA-ZА-Яа-яЁё]{3,} *)+$/gm
+        const nameParentReg = /^[А-ЯЁA-Z][а-яёa-z]+ [А-ЯЁA-Z][а-яёa-z]+$/g;
         this.errors.nameParent = nameParentReg.test(testString) ? false : true;
         break;
       }
@@ -152,7 +151,7 @@ export class Form extends React.Component<FormProps, FormState> {
             <input name="name" type="text" ref={this.name} />
             {this.errors.name && (
               <p className="error-title">
-                Please, consider that your name starts with a capital letter
+                Please, consider that pet&apos;s name should start with a capital letter
               </p>
             )}
           </div>
@@ -161,8 +160,8 @@ export class Form extends React.Component<FormProps, FormState> {
             <input name="nameParent" type="text" ref={this.nameParent} />
             {this.errors.nameParent && (
               <p className="error-title">
-                Please consider that your name must contain at least two words, each at least 3
-                characters long
+                Please consider that your name must contain at least two words, each at least 2
+                characters long and they should start with a capital letter
               </p>
             )}
           </div>
@@ -180,9 +179,7 @@ export class Form extends React.Component<FormProps, FormState> {
               Choose the color of the cat:
             </label>
             <select name="color" id="select" ref={this.color}>
-              <option selected disabled>
-                choose one
-              </option>
+              <option defaultValue={'choose one'}>choose one</option>
               <option value="black">black</option>
               <option value="light">light</option>
               <option value="red">red</option>
