@@ -5,11 +5,11 @@ import { CardList } from '../../components/CardsList/CardList';
 
 import '../../App.css';
 
-import { ICardsArray } from '../../types/types';
+import { TCardsArray } from '../../types/types';
 import { Search } from '../../components/Search/Search';
 
-export class HomePage extends React.Component<ICardsArray> {
-  constructor(props: ICardsArray) {
+export class HomePage extends React.Component<TCardsArray> {
+  constructor(props: TCardsArray) {
     super(props);
   }
   render() {

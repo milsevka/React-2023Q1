@@ -1,9 +1,9 @@
 import React from 'react';
-import { ISearch } from '../../types/types';
+import { TSearch } from '../../types/types';
 import './Search.css';
 
 export class Search extends React.Component<{}, { search: string }> {
-  constructor(props: ISearch) {
+  constructor(props: TSearch) {
     super(props);
     this.state = {
       search: '',

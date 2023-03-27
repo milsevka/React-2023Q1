@@ -1,10 +1,10 @@
 import React from 'react';
-import { CardCat } from '../../types/types';
+import { TCardCat } from '../../types/types';
 
 import '../CardsItem/CardsItem.css';
 
-export class FormCard extends React.Component<CardCat> {
-  constructor(props: CardCat) {
+export class FormCard extends React.Component<TCardCat> {
+  constructor(props: TCardCat) {
     super(props);
   }
 

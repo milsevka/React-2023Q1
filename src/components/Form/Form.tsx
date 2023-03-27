@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import { FormCard } from './FormCard';
-import { CardCat } from '../../types/types';
+import { TCardCat } from '../../types/types';
 
 import '../../App.css';
 import './Form.css';
@@ -63,7 +63,7 @@ export class Form extends React.Component<FormProps, FormState> {
     this.validateTrue(newCard);
   };
 
-  validateTrue = (card: CardCat) => {
+  validateTrue = (card: TCardCat) => {
     const values = Object.values(this.errors);
     if (values.every((elem) => !elem)) {
       this.setState({ validate: true });
