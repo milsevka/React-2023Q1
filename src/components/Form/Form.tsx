@@ -8,6 +8,7 @@ import './Form.css';
 import { FormProps, FormState, ErrorsTitle } from '../../types/types';
 
 export class Form extends React.Component<FormProps, FormState> {
+  private form = React.createRef<HTMLFormElement>();
   private name = React.createRef<HTMLInputElement>();
   private nameParent = React.createRef<HTMLInputElement>();
   private birthday = React.createRef<HTMLInputElement>();
@@ -36,8 +37,8 @@ export class Form extends React.Component<FormProps, FormState> {
     checked: false,
   };
 
-  formSubmit = (e: React.FormEvent<EventTarget>) => {
-    e.preventDefault();
+  formSubmit = (event: React.FormEvent<EventTarget>) => {
+    event.preventDefault();
     const id = this.state.cards.length + 1;
     const name = this.name.current!.value;
     const nameParent = this.nameParent.current!.value;
@@ -69,6 +70,7 @@ export class Form extends React.Component<FormProps, FormState> {
       this.setState({ validate: true });
       this.setState({ cards: [...this.state.cards, card] });
       this.openModal();
+      this.form.current!.reset();
     } else {
       this.setState({ validate: false });
     }
@@ -76,21 +78,9 @@ export class Form extends React.Component<FormProps, FormState> {
 
   openModal = () => {
     this.setState({ modal: true });
-    this.resetForms();
     setTimeout(() => {
       this.setState({ modal: false });
     }, 1000);
-  };
-
-  resetForms = () => {
-    this.name.current!.value = '';
-    this.nameParent.current!.value = '';
-    this.birthday.current!.value = '';
-    this.color.current!.value = 'choose one';
-    this.male.current!.checked = false;
-    this.female.current!.checked = false;
-    this.checked.current!.checked = false;
-    this.photo.current!.value = '';
   };
 
   validatePhoto = (file: File) => {
@@ -144,7 +134,7 @@ export class Form extends React.Component<FormProps, FormState> {
   render() {
     return (
       <main className="main">
-        <form className="form-container">
+        <form className="form-container" ref={this.form}>
           <h1 className="label-title">Add a cat card</h1>
           <div className="input-container">
             <label className="label-title">Cat name:</label>
