@@ -1,11 +1,11 @@
 import React from 'react';
 import { Fragment } from 'react';
-import { ICardsArray } from '../../types/types';
+import { TCardsArray } from '../../types/types';
 import { CardsItem } from '../CardsItem/CardsItem';
 import './CardList.css';
 
-export class CardList extends React.Component<ICardsArray> {
-  constructor(props: ICardsArray) {
+export class CardList extends React.Component<TCardsArray> {
+  constructor(props: TCardsArray) {
     super(props);
   }
 

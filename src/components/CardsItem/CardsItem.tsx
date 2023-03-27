@@ -1,10 +1,10 @@
 import React from 'react';
-import { ICards } from '../../types/types';
+import { TCards } from '../../types/types';
 
 import './CardsItem.css';
 
-export class CardsItem extends React.Component<ICards> {
-  constructor(props: ICards) {
+export class CardsItem extends React.Component<TCards> {
+  constructor(props: TCards) {
     super(props);
   }
 
@@ -13,7 +13,7 @@ export class CardsItem extends React.Component<ICards> {
 
     return (
       <div className="cards-item">
-        <img className="cards-img" src={`${src}`} />
+        <img className="cards-img" src={src} />
         <div className="title-container">
           <h2 className="cards-title">{title}</h2>
           <p className="cards-name">{name}</p>

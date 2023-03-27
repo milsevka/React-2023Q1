@@ -1,0 +1,51 @@
+.form-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    background-color: rgba(16, 53, 88, 0.8);
+    padding: 10px;
+}
+.input-container {
+    display: flex;
+    gap: 5px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.switch-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+}
+
+.label-title {
+    font-size: 25px;
+    color: #fff53b;
+}
+.button {
+   padding: 10px;
+   border-radius: 10px;
+   background-color:rgb(52, 159, 60); 
+}
+button, 
+button:active, 
+button:focus {
+    outline: none;
+}
+button:hover {
+    transform: scale(1.1);
+}
+.cards-list {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+.error-title {
+    color: rgb(199, 118, 118);
+}
