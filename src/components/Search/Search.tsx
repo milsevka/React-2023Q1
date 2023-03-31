@@ -1,39 +1,20 @@
-import React from 'react';
-import { TSearch } from '../../types/types';
+import React, { useEffect, useState } from 'react';
 import './Search.css';
 
-export class Search extends React.Component<{}, { search: string }> {
-  constructor(props: TSearch) {
-    super(props);
-    this.state = {
-      search: '',
-    };
-  }
+export const Search = () => {
+  const [search, setSearch] = useState((localStorage.getItem('search') as string) || 'Http cats');
 
-  onValueChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    this.setState({ search: e.target.value });
+  const onValueChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    setSearch(e.target.value);
   };
 
-  componentWillUnmount() {
-    localStorage.setItem('search', this.state.search);
-  }
+  useEffect(() => {
+    localStorage.setItem('search', search);
+  }, [search]);
 
-  componentDidMount() {
-    this.setState({
-      search: (localStorage.getItem('search') as string) || 'Http cats',
-    });
-  }
-
-  render() {
-    return (
-      <div className="search-container">
-        <input
-          type="text"
-          className="search-input"
-          value={this.state.search}
-          onChange={this.onValueChange}
-        />
-      </div>
-    );
-  }
-}
+  return (
+    <div className="search-container">
+      <input type="text" className="search-input" value={search} onChange={onValueChange} />
+    </div>
+  );
+};

@@ -3,23 +3,17 @@ import { TCards } from '../../types/types';
 
 import './CardsItem.css';
 
-export class CardsItem extends React.Component<TCards> {
-  constructor(props: TCards) {
-    super(props);
-  }
+export const CardsItem = (props: TCards) => {
+  const { name, title, src, description } = props.card;
 
-  render() {
-    const { name, title, src, description } = this.props.card;
-
-    return (
-      <div className="cards-item">
-        <img className="cards-img" src={src} />
-        <div className="title-container">
-          <h2 className="cards-title">{title}</h2>
-          <p className="cards-name">{name}</p>
-        </div>
-        <p className="cards-desc">{description}</p>
+  return (
+    <div className="cards-item">
+      <img className="cards-img" src={src} />
+      <div className="title-container">
+        <h2 className="cards-title">{title}</h2>
+        <p className="cards-name">{name}</p>
       </div>
-    );
-  }
-}
+      <p className="cards-desc">{description}</p>
+    </div>
+  );
+};
