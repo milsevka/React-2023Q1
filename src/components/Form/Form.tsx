@@ -135,7 +135,7 @@ export class Form extends React.Component<FormProps, FormState> {
     return (
       <main className="main">
         <form className="form-container" ref={this.form}>
-          <h1 className="label-title">Add a cat card</h1>
+          <h2 className="label-title">Add a cat card</h2>
           <div className="input-container">
             <label className="label-title">Cat name:</label>
             <input name="name" type="text" ref={this.name} />

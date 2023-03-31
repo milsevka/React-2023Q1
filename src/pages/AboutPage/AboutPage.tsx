@@ -11,7 +11,6 @@ export const AboutPage = () => {
     <>
       <Header />
       <main className="main">
-        <h1 className="page-title">About Page</h1>
         <p className="about-title">
           Hello, this is a site with cats and Http request responses.
           <br />

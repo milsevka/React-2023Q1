@@ -9,7 +9,6 @@ export const NotFoundPage = () => {
     <>
       <Header />
       <div className="main">
-        <h1 className="page-title">Not Found Page</h1>
         <img src={require('../../assets/cards/404.jpg')} />
       </div>
       <Footer />

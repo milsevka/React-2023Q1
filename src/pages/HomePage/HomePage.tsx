@@ -13,7 +13,6 @@ export const HomePage = (props: TCardsArray) => {
     <>
       <Header />
       <main className="main">
-        <h1 className="page-title">Home Page</h1>
         <Search />
         <CardList cards={props.cards} />
       </main>

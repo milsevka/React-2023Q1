@@ -9,7 +9,7 @@ import { Cards } from './data/cards';
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage cards={Cards} />} />
+      <Route path="/home" element={<HomePage cards={Cards} />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/404" element={<NotFoundPage />} />
       <Route path="/form" element={<FormPage />} />
