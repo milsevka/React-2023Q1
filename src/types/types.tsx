@@ -6,10 +6,6 @@ export type TCards = {
   card: TCard;
 };
 
-export type TSearch = {
-  search: string;
-};
-
 export type TCard = {
   id: number;
   name: string;
@@ -18,32 +14,12 @@ export type TCard = {
   description: string;
 };
 
-export type FormProps = {
-  props?: null;
-};
-
 export type TCardCat = {
-  id: number;
-  name: string;
+  nameCat: string;
   nameParent: string;
   birthday: string;
   color: string;
-  gender: string;
+  male: string;
   photo: File;
-};
-
-export type FormState = {
-  cards: TCardCat[];
-  validate: boolean;
-  modal: boolean;
-};
-
-export type ErrorsTitle = {
-  name: boolean;
-  nameParent: boolean;
-  birthday: boolean;
-  color: boolean;
-  photo: boolean;
-  gender: boolean;
-  checked: boolean;
+  checked?: boolean;
 };
