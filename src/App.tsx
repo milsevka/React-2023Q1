@@ -6,7 +6,7 @@ import { FormPage } from './pages/FormPage/FormPage';
 import { Navigate, Route, Routes } from 'react-router';
 import { Cards } from './data/cards';
 
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="/" element={<HomePage cards={Cards} />} />
@@ -16,6 +16,6 @@ function App() {
       <Route path="*" element={<Navigate to="/404" replace />} />
     </Routes>
   );
-}
+};
 
 export default App;
