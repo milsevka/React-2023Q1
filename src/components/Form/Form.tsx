@@ -41,7 +41,6 @@ export const Form = () => {
   };
 
   const onSubmit: SubmitHandler<FormInputs> = (data: FormInputs) => {
-    console.log(data);
     const { nameParent, birthday, color, male, nameCat } = data;
     const photo = data.photo[0];
     const newCard = { nameCat, nameParent, birthday, color, male, photo };
