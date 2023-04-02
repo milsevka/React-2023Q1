@@ -51,7 +51,7 @@ export const Form = () => {
   return (
     <main className="main">
       <form className="form-container" onSubmit={handleSubmit(onSubmit)}>
-        <h2 className="label-title">Add a cat card</h2>
+        <p className="label-title">Add a cat card</p>
         <div className="input-container">
           <label className="label-title">Cat name:</label>
           <input
@@ -59,6 +59,7 @@ export const Form = () => {
             defaultValue={''}
             name="nameCat"
             type="text"
+            data-testid="nameCat"
           />
           {errors.nameCat && (
             <p className="error-title">
@@ -73,6 +74,7 @@ export const Form = () => {
             defaultValue={''}
             name="nameParent"
             type="text"
+            data-testid="nameParent"
           />
           {errors.nameParent && (
             <p className="error-title">
@@ -88,6 +90,7 @@ export const Form = () => {
             defaultValue={''}
             name="birthday"
             type="date"
+            data-testid="birthday"
           />
           {errors.birthday && (
             <p className="error-title">
@@ -104,6 +107,7 @@ export const Form = () => {
             defaultValue=""
             name="color"
             id="select"
+            data-testid="color"
           >
             <option value="" disabled>
               choose one
@@ -125,6 +129,7 @@ export const Form = () => {
               name="male"
               type="radio"
               value="female"
+              data-testid="female"
             />
             <label className="label-title">Male</label>
             <input
@@ -133,6 +138,7 @@ export const Form = () => {
               name="male"
               type="radio"
               value="male"
+              data-testid="male"
             />
           </div>
           {errors.male && <p className="error-title">Please choose the gender of the cat.</p>}
@@ -144,6 +150,7 @@ export const Form = () => {
             defaultValue={''}
             type="file"
             name="photo"
+            data-testid="photo"
           />
           {errors.photo && <p className="error-title">You must upload a photo of your cat</p>}
         </div>
@@ -154,6 +161,7 @@ export const Form = () => {
             defaultChecked={false}
             name="checked"
             type="checkbox"
+            data-testid="checked"
           />
           {errors.checked && (
             <p className="error-title">You must agree to the processing of data</p>

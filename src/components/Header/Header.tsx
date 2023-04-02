@@ -3,14 +3,23 @@ import { NavLink, useLocation } from 'react-router-dom';
 
 import './Header.css';
 import '../../App.css';
+type PageType = {
+  [key: string]: string;
+};
+
+const PageName: PageType = {
+  '/': 'Home Page',
+  '/about': 'About Page',
+  '/form': 'Form Page',
+  '/404': 'Not Found Page',
+};
 
 export const Header = () => {
   const { pathname } = useLocation();
-  const currentPathName = pathname.slice(1)[0].toUpperCase() + pathname.slice(2);
   return (
     <header className="header">
       <nav className="header-link-container">
-        <NavLink to="/home" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
+        <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
           Home Page
         </NavLink>
         <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
@@ -20,7 +29,7 @@ export const Header = () => {
           Form Page
         </NavLink>
       </nav>
-      <h1 className="page-title">{currentPathName} Page</h1>
+      <h1 className="page-title">{PageName[pathname]}</h1>
     </header>
   );
 };
