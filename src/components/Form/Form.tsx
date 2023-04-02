@@ -41,6 +41,7 @@ export const Form = () => {
   };
 
   const onSubmit: SubmitHandler<FormInputs> = (data: FormInputs) => {
+    console.log(data);
     const { nameParent, birthday, color, male, nameCat } = data;
     const photo = data.photo[0];
     const newCard = { nameCat, nameParent, birthday, color, male, photo };
@@ -78,8 +79,8 @@ export const Form = () => {
           />
           {errors.nameParent && (
             <p className="error-title">
-              Please consider that your name must contain at least two words, each at least 2
-              characters long and they should start with a capital letter
+              Please consider that your name must contain at least two words and they should start
+              with a capital letter
             </p>
           )}
         </div>
@@ -103,10 +104,10 @@ export const Form = () => {
             Choose the color of the cat:
           </label>
           <select
-            {...(register('color'), { required: true })}
-            defaultValue=""
+            {...register('color', { required: true })}
             name="color"
             id="select"
+            defaultValue=""
             data-testid="color"
           >
             <option value="" disabled>
