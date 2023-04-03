@@ -11,7 +11,7 @@ describe('render header layout', () => {
         <Header />
       </BrowserRouter>
     );
-    expect(screen.getByText(/Home Page/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Home Page/i)).toHaveLength(2);
     expect(screen.getByText(/About Page/i)).toBeInTheDocument();
     expect(screen.getByText(/Form Page/i)).toBeInTheDocument();
     expect(screen.getAllByRole('link')).toHaveLength(3);

@@ -1,36 +1,35 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 import './Header.css';
+import '../../App.css';
+type PageType = {
+  [key: string]: string;
+};
 
-export class Header extends React.Component {
-  active = {
-    color: '#1d66ab',
-    background: '#a0bdd880',
-    padding: '5px',
-    borderRadius: '10px',
-  };
-  inactive = {
-    color: '#d5e1ec',
-    background: 'transparent',
-    padding: '5px',
-    borderRadius: '10px',
-  };
-  render() {
-    return (
-      <header className="header">
-        <nav className="header-link-container">
-          <NavLink to="/" style={({ isActive }) => (isActive ? this.active : this.inactive)}>
-            Home Page
-          </NavLink>
-          <NavLink to="/about" style={({ isActive }) => (isActive ? this.active : this.inactive)}>
-            About Page
-          </NavLink>
-          <NavLink to="/form" style={({ isActive }) => (isActive ? this.active : this.inactive)}>
-            Form Page
-          </NavLink>
-        </nav>
-      </header>
-    );
-  }
-}
+const PageName: PageType = {
+  '/': 'Home Page',
+  '/about': 'About Page',
+  '/form': 'Form Page',
+  '/404': 'Not Found Page',
+};
+
+export const Header = () => {
+  const { pathname } = useLocation();
+  return (
+    <header className="header">
+      <nav className="header-link-container">
+        <NavLink to="/" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
+          Home Page
+        </NavLink>
+        <NavLink to="/about" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
+          About Page
+        </NavLink>
+        <NavLink to="/form" className={({ isActive }) => (isActive ? 'active' : 'inactive')}>
+          Form Page
+        </NavLink>
+      </nav>
+      <h1 className="page-title">{PageName[pathname]}</h1>
+    </header>
+  );
+};

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter, MemoryRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 
 import { AboutPage } from './pages/AboutPage/AboutPage';
 import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
@@ -11,39 +11,37 @@ import App from './App';
 describe('render pages', () => {
   it('render about page', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter initialEntries={['/about']}>
         <AboutPage />
-      </BrowserRouter>
+      </MemoryRouter>
     );
     expect(screen.getByRole('heading')).toHaveTextContent('About Page');
   });
-
   it('render not found page', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter initialEntries={['/404']}>
         <NotFoundPage />
-      </BrowserRouter>
+      </MemoryRouter>
     );
     expect(screen.getByRole('heading')).toHaveTextContent('Not Found Page');
     expect(screen.getByRole('img')).toBeInTheDocument();
   });
-
   it('render home page', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter initialEntries={['/']}>
         <HomePage />
-      </BrowserRouter>
+      </MemoryRouter>
     );
     expect(screen.getByRole('heading')).toHaveTextContent('Home Page');
   });
 
   it('render form page', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter initialEntries={['/form']}>
         <FormPage />
-      </BrowserRouter>
+      </MemoryRouter>
     );
-    expect(screen.getByRole('heading')).toHaveTextContent('Add a cat card');
+    expect(screen.getByRole('heading')).toHaveTextContent('Form Page');
   });
 });
 

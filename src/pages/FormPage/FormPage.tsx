@@ -5,14 +5,12 @@ import { Footer } from '../../components/Footer/Footer';
 import '../../App.css';
 import { Form } from '../../components/Form/Form';
 
-export class FormPage extends React.Component {
-  render() {
-    return (
-      <>
-        <Header />
-        <Form />
-        <Footer />
-      </>
-    );
-  }
-}
+export const FormPage = () => {
+  return (
+    <>
+      <Header />
+      <Form />
+      <Footer />
+    </>
+  );
+};

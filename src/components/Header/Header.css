@@ -1,6 +1,7 @@
 .header {
     padding: 2%;
     min-height: 10vh;
+    text-align: center;
 }
 
 .header-link-container {
@@ -10,4 +11,17 @@
     align-content: center;
     list-style-type: none;
     gap: 20px;
+}
+.active {
+    color: #1d66ab;
+    background-color: #a0bdd880;
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.inactive {
+    color: #d5e1ec;
+    background-color: transparent;
+    padding: 5px;
+    border-radius: 10px;
 }
