@@ -19,7 +19,7 @@ export type TCardCat = {
   nameParent: string;
   birthday: string;
   color: string;
-  male: string;
+  gender: string;
   photo: File;
   checked?: boolean;
 };

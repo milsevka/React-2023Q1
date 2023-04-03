@@ -7,11 +7,21 @@ import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
 import { TCardCat } from '../../types/types';
 
-export const Form = () => {
-  const regName = /^([A-ZА-ЯЁ])/;
-  const regParentName = /^[А-ЯЁA-Z][а-яёa-z]+ [А-ЯЁA-Z][а-яёa-z]+$/g;
-  const isBirthdayTrue = (date: string) => Date.now() > new Date(date).getTime();
+type FormInputs = {
+  nameCat: string;
+  nameParent: string;
+  birthday: string;
+  color: string;
+  gender: string;
+  photo: FileList;
+  checked: boolean;
+};
 
+const regName = /^([A-ZА-ЯЁ])/;
+const regParentName = /^[А-ЯЁA-Z][а-яёa-z]+ [А-ЯЁA-Z][а-яёa-z]+$/g;
+const isBirthdayTrue = (date: string) => Date.now() > new Date(date).getTime();
+
+export const Form = () => {
   const {
     register,
     handleSubmit,
@@ -30,20 +40,10 @@ export const Form = () => {
     }, 1000);
   };
 
-  type FormInputs = {
-    nameCat: string;
-    nameParent: string;
-    birthday: string;
-    color: string;
-    male: string;
-    photo: FileList;
-    checked: boolean;
-  };
-
   const onSubmit: SubmitHandler<FormInputs> = (data: FormInputs) => {
-    const { nameParent, birthday, color, male, nameCat } = data;
+    const { nameParent, birthday, color, gender, nameCat } = data;
     const photo = data.photo[0];
-    const newCard = { nameCat, nameParent, birthday, color, male, photo };
+    const newCard = { nameCat, nameParent, birthday, color, gender, photo };
     setCards([...cards, newCard]);
     openCreationTitle();
   };
@@ -124,24 +124,24 @@ export const Form = () => {
           <div className="switch-container">
             <label className="label-title">Female</label>
             <input
-              {...register('male', { required: true })}
+              {...register('gender', { required: true })}
               defaultChecked={false}
-              name="male"
+              name="gender"
               type="radio"
               value="female"
               data-testid="female"
             />
             <label className="label-title">Male</label>
             <input
-              {...register('male', { required: true })}
+              {...register('gender', { required: true })}
               defaultChecked={false}
-              name="male"
+              name="gender"
               type="radio"
               value="male"
               data-testid="male"
             />
           </div>
-          {errors.male && <p className="error-title">Please choose the gender of the cat.</p>}
+          {errors.gender && <p className="error-title">Please choose the gender of the cat.</p>}
         </div>
         <div className="input-container">
           <label className="label-title">Upload a photo of your cat</label>
