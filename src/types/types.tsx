@@ -4,14 +4,15 @@ export type TCardsArray = {
 
 export type TCards = {
   card: TCard;
+  onClick?: () => void;
 };
 
 export type TCard = {
   id: number;
   name: string;
-  title: string;
-  src: string;
-  description: string;
+  image: string;
+  gender: string;
+  species: string;
 };
 
 export type TCardCat = {

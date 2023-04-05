@@ -12,10 +12,9 @@ export const AboutPage = () => {
       <Header />
       <main className="main">
         <p className="about-title">
-          Hello, this is a site with cats and Http request responses.
-          <br />
-          The original pictures are taken from the website
-          <Link to="https://http.cat/"> HTTP Cats.</Link>
+          This documentation will help you get familiar with the resources of the Rick and Morty API
+          and show you how to make different queries, so that you can get the most out of it.
+          <Link to="https://rickandmortyapi.com/documentation/#introduction"> Rick and Morty</Link>
         </p>
       </main>
       <Footer />

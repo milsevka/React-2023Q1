@@ -7,16 +7,16 @@ const cardArray = [
   {
     id: 2,
     name: 'Cat',
-    title: '100',
-    src: 'cat src',
-    description: 'meow',
+    gender: 'female',
+    image: 'src',
+    species: 'meow meow meow',
   },
   {
-    id: 3,
-    name: 'Dog',
-    title: '101',
-    src: 'dog src',
-    description: 'woof',
+    id: 2,
+    name: 'Cat',
+    gender: 'female',
+    image: 'src',
+    species: 'meow meow meow',
   },
 ];
 
