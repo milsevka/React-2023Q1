@@ -1,0 +1,32 @@
+.card-modal-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(189, 181, 181, 0.05);
+}
+.cards-item-modal {
+    width: 100%;
+    max-width: 550px;
+    background: rgb(73, 112, 142);
+    position: relative;
+    padding: 20px;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+.modal-close {
+    cursor: pointer;
+    font-size: 2rem;
+    padding: 0.5rem;
+    margin: -1rem -1rem -1rem auto;
+}

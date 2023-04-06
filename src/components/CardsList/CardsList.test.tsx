@@ -10,6 +10,9 @@ const cardArray = [
     gender: 'female',
     image: 'src',
     species: 'meow meow meow',
+    location: {
+      name: 'meow meow meow',
+    },
   },
   {
     id: 2,
@@ -17,6 +20,9 @@ const cardArray = [
     gender: 'female',
     image: 'src',
     species: 'meow meow meow',
+    location: {
+      name: 'meow meow meow',
+    },
   },
 ];
 

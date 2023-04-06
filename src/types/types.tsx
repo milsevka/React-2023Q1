@@ -1,5 +1,6 @@
 export type TCardsArray = {
   cards?: TCard[];
+  loaded?: boolean;
 };
 
 export type TCards = {
@@ -13,6 +14,15 @@ export type TCard = {
   image: string;
   gender: string;
   species: string;
+  location: {
+    name: string;
+  };
+};
+export type TCardModal = {
+  card: null | TCard;
+  open: boolean;
+  loaded: boolean;
+  close: () => void;
 };
 
 export type TCardCat = {

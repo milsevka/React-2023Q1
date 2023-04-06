@@ -1,17 +1,29 @@
-import React from 'react';
-import { TCards } from '../../types/types';
+import React, { Fragment } from 'react';
+import { TCardModal } from '../../types/types';
 
 import '../CardsItem/CardsItem.css';
+import './Modal.css';
+import Spinner from './Spinner';
 
-export const Modal = (props: TCards) => {
-  const { name, image, species, gender } = props.card;
-
+export const Modal = (props: TCardModal) => {
+  const { card, open, close, loaded } = props;
   return (
-    <div className="cards-item">
-      <img className="cards-img" src={image} />
-      <p className="cards-name">{name}</p>
-      <p className="cards-desc">{species}</p>
-      <p className="cards-desc">{gender}</p>
-    </div>
+    <Fragment>
+      {open && (
+        <div className="card-modal-container">
+          <div className="cards-item-modal">
+            {loaded && <Spinner />}
+            <span className="modal-close" onClick={close}>
+              &times;
+            </span>
+            <img className="cards-img" src={card?.image} />
+            <p className="cards-name">{card?.name}</p>
+            <p className="cards-desc">Species: {card?.species}</p>
+            <p className="cards-desc">Gender: {card?.gender}</p>
+            <p className="cards-desc">Location: {card?.location.name}</p>
+          </div>
+        </div>
+      )}
+    </Fragment>
   );
 };

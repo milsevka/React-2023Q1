@@ -7,28 +7,29 @@ import { Navigate, Route, Routes } from 'react-router';
 import { useEffect, useState } from 'react';
 
 const App = () => {
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [error, setError] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(true);
   const [cards, setCards] = useState([]);
 
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character`)
-      .then((res) => res.json())
+      .then(async (res) => await res.json())
       .then(
         (result) => {
-          setIsLoaded(true);
+          setIsLoaded(false);
           setCards(result.results);
         },
         (error) => {
           setIsLoaded(true);
-          setError(error);
+          console.log(error);
+          // setError(error);
         }
       );
   }, []);
 
   return (
     <Routes>
-      <Route path="/" element={<HomePage cards={cards} />} />
+      <Route path="/" element={<HomePage cards={cards} loaded={isLoaded} />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/404" element={<NotFoundPage />} />
       <Route path="/form" element={<FormPage />} />

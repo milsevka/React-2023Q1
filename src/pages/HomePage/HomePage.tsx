@@ -14,7 +14,7 @@ export const HomePage = (props: TCardsArray) => {
       <Header />
       <main className="main">
         <Search />
-        <CardList cards={props.cards} />
+        <CardList cards={props.cards} loaded={props.loaded} />
       </main>
       <Footer />
     </>

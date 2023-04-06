@@ -9,6 +9,9 @@ const card = {
   gender: 'female',
   image: 'src',
   species: 'meow meow meow',
+  location: {
+    name: 'meow meow meow',
+  },
 };
 
 describe('render card', () => {
@@ -17,6 +20,7 @@ describe('render card', () => {
     expect(screen.getByText(card.species)).toBeInTheDocument();
     expect(screen.getByText(card.gender)).toBeInTheDocument();
     expect(screen.getByText(card.name)).toBeInTheDocument();
+    expect(screen.getByText(card.location.name)).toBeInTheDocument();
     expect(screen.getByRole('img')).toBeInTheDocument();
   });
 });
