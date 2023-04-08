@@ -5,24 +5,16 @@ import { CardList } from './CardList';
 
 const cardArray = [
   {
-    id: 2,
+    id: 1,
     name: 'Cat',
-    gender: 'female',
     image: 'src',
     species: 'meow meow meow',
-    location: {
-      name: 'meow meow meow',
-    },
   },
   {
     id: 2,
     name: 'Cat',
-    gender: 'female',
     image: 'src',
     species: 'meow meow meow',
-    location: {
-      name: 'meow meow meow',
-    },
   },
 ];
 

@@ -3,13 +3,13 @@ import { Fragment } from 'react';
 import { TCardsArray, TCard } from '../../types/types';
 import { CardsItem } from '../CardsItem/CardsItem';
 import { Modal } from '../Modal/Modal';
-import Spinner from '../Modal/Spinner';
+import Spinner from '../Spinner/Spinner';
 import './CardList.css';
 
 export const CardList = (props: TCardsArray) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [card, setCard] = useState<TCard | null>(null);
-  // const [error, setError] = useState(null);
+  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleClick = (id: number) => {
@@ -19,19 +19,16 @@ export const CardList = (props: TCardsArray) => {
   };
 
   const openModal = (id: number) => {
-    fetch(`https://rickandmortyapi.com/api/character/${id}`)
-      .then(async (res) => await res.json())
-      .then(
-        (res) => {
-          setCard(res);
-          setLoading(false);
-        },
-        (error) => {
-          setLoading(true);
-          console.log(error);
-          // setError(error);
-        }
-      );
+    fetch(`https://rickandmortyapi.com/api/character/${id}`).then(async (res) => {
+      const data = await res.json();
+      if (res.ok) {
+        setCard(data);
+        setLoading(false);
+      } else {
+        setLoading(true);
+        setError(data.error);
+      }
+    });
   };
 
   const close = () => {
@@ -44,6 +41,7 @@ export const CardList = (props: TCardsArray) => {
   }
   return (
     <div className="wrapper">
+      {error}
       {props.cards?.map((item) => {
         return (
           <Fragment key={item.id}>

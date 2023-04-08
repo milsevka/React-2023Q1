@@ -12,10 +12,10 @@ export type TCard = {
   id: number;
   name: string;
   image: string;
-  gender: string;
+  gender?: string;
   species: string;
-  location: {
-    name: string;
+  location?: {
+    name?: string;
   };
 };
 export type TCardModal = {
