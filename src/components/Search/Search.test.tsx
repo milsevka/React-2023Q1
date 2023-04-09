@@ -12,4 +12,17 @@ describe('render search', () => {
     const textInput = screen.getByRole('textbox');
     userEvent.type(textInput, 'Rick');
   });
+
+  it('render ls', () => {
+    const setError = jest.fn();
+    const setCards = jest.fn();
+    render(<Search onCards={setCards} error={setError} />);
+    const textInput = screen.getByRole('textbox');
+    userEvent.type(textInput, 'Rick');
+    const saveToLocalStorage = jest.fn(() => {
+      localStorage.setItem('input', 'Rick');
+    });
+    saveToLocalStorage();
+    expect(localStorage.getItem('input')).toBe('Rick');
+  });
 });

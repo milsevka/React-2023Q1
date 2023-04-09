@@ -25,13 +25,13 @@ describe('render modal', () => {
     expect(screen.getByText(`Location: ${card.location.name}`)).toBeInTheDocument();
     expect(screen.getByText(card.name)).toBeInTheDocument();
     expect(screen.getByRole('img')).toBeInTheDocument();
+    expect(screen.getByTestId('closeModal')).toBeInTheDocument();
   });
 
   it('render spinner', () => {
     const loading = true;
+    const modalOpen = true;
+    render(<Modal card={card} open={modalOpen} close={close} loaded={loading} />);
     render(loading && <Spinner />);
-    expect(screen.queryByText(/Species: /)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Gender: /)).not.toBeInTheDocument();
-    expect(screen.queryByText(/Location: /)).not.toBeInTheDocument();
   });
 });

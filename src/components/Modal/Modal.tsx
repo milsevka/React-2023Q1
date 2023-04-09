@@ -13,7 +13,7 @@ export const Modal = (props: TCardModal) => {
         <div className="card-modal-container">
           <div className="cards-item-modal">
             {loaded && <Spinner />}
-            <span className="modal-close" onClick={close}>
+            <span data-testid="closeModal" className="modal-close" onClick={close}>
               &times;
             </span>
             <img className="cards-img" src={card?.image} />
