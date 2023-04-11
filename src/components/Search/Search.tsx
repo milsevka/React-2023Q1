@@ -1,16 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import React, { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react';
 import './Search.css';
 
 type TSearch = {
-  onCards: Dispatch<SetStateAction<never[]>>;
-  error: Dispatch<SetStateAction<null>>;
+  setCards: Dispatch<SetStateAction<never[]>>;
+  error: Dispatch<SetStateAction<boolean>>;
+  loaded: Dispatch<SetStateAction<boolean>>;
 };
 
 export const Search = (props: TSearch) => {
-  const [search, setSearch] = useState((localStorage.getItem('search') as string) || '');
-  const { onCards } = props;
-  const [input, setInput] = useState('');
+  const [search, setSearch] = useState(localStorage.getItem('search') || '');
+  const { setCards } = props;
+  const [input, setInput] = useState(search);
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     setSearch(e.target.value);
@@ -23,21 +24,28 @@ export const Search = (props: TSearch) => {
   };
 
   useEffect(() => {
-    fetch(`https://rickandmortyapi.com/api/character/?name=${search}`).then(async (res) => {
-      const data = await res.json();
-      if (res.ok) {
-        onCards(data.results);
-      }
-      props.error(data.error);
-    });
+    fetch(`https://rickandmortyapi.com/api/character/?name=${search}`)
+      .then((res) => {
+        if (res.ok) {
+          props.error(false);
+          props.loaded(false);
+          return res.json();
+        }
+        if (!res.ok || res.status === 404) {
+          props.loaded(true);
+          props.error(true);
+          throw Error(`${res.status}`);
+        }
+      })
+      .then((data) => setCards(data.results))
+      .catch((err) => console.error(`Error status: ${err} :(`));
   }, [input]);
 
   return (
-    <div className="search-container">
-      <input type="text" className="search-input" value={search} onChange={onValueChange} />
-      <button className="search-submit" onClick={handleSubmit}>
-        Search
-      </button>
-    </div>
+    <Fragment>
+      <form className="search-container" onSubmit={handleSubmit}>
+        <input type="text" className="search-input" value={search} onChange={onValueChange} />
+      </form>
+    </Fragment>
   );
 };

@@ -9,7 +9,6 @@ import './CardList.css';
 export const CardList = (props: TCardsArray) => {
   const [modalOpen, setModalOpen] = useState(false);
   const [card, setCard] = useState<TCard | null>(null);
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleClick = (id: number) => {
@@ -19,16 +18,19 @@ export const CardList = (props: TCardsArray) => {
   };
 
   const openModal = (id: number) => {
-    fetch(`https://rickandmortyapi.com/api/character/${id}`).then(async (res) => {
-      const data = await res.json();
-      if (res.ok) {
-        setCard(data);
-        setLoading(false);
-      } else {
-        setLoading(true);
-        setError(data.error);
-      }
-    });
+    fetch(`https://rickandmortyapi.com/api/character/${id}`)
+      .then((res) => {
+        if (res.ok) {
+          setLoading(false);
+          return res.json();
+        }
+        if (!res.ok || res.status === 404) {
+          setLoading(true);
+          props.error = true;
+        }
+      })
+      .then((data) => setCard(data))
+      .catch((err) => console.error(`Error status: ${err} :(`));
   };
 
   const close = () => {
@@ -41,7 +43,6 @@ export const CardList = (props: TCardsArray) => {
   }
   return (
     <div className="wrapper">
-      {error}
       {props.cards?.map((item) => {
         return (
           <Fragment key={item.id}>

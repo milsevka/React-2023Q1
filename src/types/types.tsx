@@ -1,6 +1,7 @@
 export type TCardsArray = {
   cards?: TCard[];
   loaded?: boolean;
+  error?: boolean;
 };
 
 export type TCards = {

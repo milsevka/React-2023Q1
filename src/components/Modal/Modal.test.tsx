@@ -2,7 +2,6 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 
 import { Modal } from './Modal';
-import Spinner from '../Spinner/Spinner';
 
 const card = {
   id: 2,
@@ -32,6 +31,5 @@ describe('render modal', () => {
     const loading = true;
     const modalOpen = true;
     render(<Modal card={card} open={modalOpen} close={close} loaded={loading} />);
-    render(loading && <Spinner />);
   });
 });
