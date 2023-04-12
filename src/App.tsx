@@ -4,12 +4,11 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { AboutPage } from './pages/AboutPage/AboutPage';
 import { FormPage } from './pages/FormPage/FormPage';
 import { Navigate, Route, Routes } from 'react-router';
-import { Cards } from './data/cards';
 
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage cards={Cards} />} />
+      <Route path="/" element={<HomePage />} />
       <Route path="/about" element={<AboutPage />} />
       <Route path="/404" element={<NotFoundPage />} />
       <Route path="/form" element={<FormPage />} />

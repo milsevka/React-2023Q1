@@ -9,3 +9,7 @@
     align-items: center;
     justify-content: center;
 }
+.search-submit {
+    padding: 10px;
+    cursor: pointer;
+}

@@ -4,16 +4,16 @@ import { TCards } from '../../types/types';
 import './CardsItem.css';
 
 export const CardsItem = (props: TCards) => {
-  const { name, title, src, description } = props.card;
+  const {
+    card: { name, image, species },
+    onClick,
+  } = props;
 
   return (
-    <div className="cards-item">
-      <img className="cards-img" src={src} />
-      <div className="title-container">
-        <h2 className="cards-title">{title}</h2>
-        <p className="cards-name">{name}</p>
-      </div>
-      <p className="cards-desc">{description}</p>
+    <div className="cards-item" onClick={onClick}>
+      <img className="cards-img" src={image} />
+      <p className="cards-name">{name}</p>
+      <p className="cards-desc">{species}</p>
     </div>
   );
 };
