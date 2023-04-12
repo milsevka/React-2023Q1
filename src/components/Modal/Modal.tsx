@@ -10,8 +10,8 @@ export const Modal = (props: TCardModal) => {
   return (
     <Fragment>
       {open && (
-        <div className="card-modal-container">
-          <div className="cards-item-modal">
+        <div className="card-modal-container" onClick={close}>
+          <div className="cards-item-modal" onClick={(e) => e.stopPropagation()}>
             {loaded && <Spinner />}
             <span data-testid="closeModal" className="modal-close" onClick={close}>
               &times;
