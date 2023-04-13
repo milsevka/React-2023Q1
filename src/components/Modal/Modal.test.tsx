@@ -13,12 +13,10 @@ const card = {
     name: 'fff',
   },
 };
-const modalOpen = true;
 
 describe('render modal', () => {
   it('render modal item', () => {
-    const loading = false;
-    render(<Modal card={card} open={modalOpen} close={close} loaded={loading} />);
+    render(<Modal card={card} close={close} />);
     expect(screen.getByText(`Species: ${card.species}`)).toBeInTheDocument();
     expect(screen.getByText(`Gender: ${card.gender}`)).toBeInTheDocument();
     expect(screen.getByText(`Location: ${card.location.name}`)).toBeInTheDocument();
@@ -28,8 +26,6 @@ describe('render modal', () => {
   });
 
   it('render spinner', () => {
-    const loading = true;
-    const modalOpen = true;
-    render(<Modal card={card} open={modalOpen} close={close} loaded={loading} />);
+    render(<Modal card={card} close={close} />);
   });
 });

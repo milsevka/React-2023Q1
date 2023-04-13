@@ -1,52 +1,56 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Fragment } from 'react';
-import { TCardsArray, TCard } from '../../types/types';
+import { useDispatch } from 'react-redux';
+import { getStarted, getError, openModal } from '../../store/reducer';
+import { useAppSelector } from '../../store/store';
+import { TCardsArray } from '../../types/types';
 import { CardsItem } from '../CardsItem/CardsItem';
 import { Modal } from '../Modal/Modal';
 import Spinner from '../Spinner/Spinner';
 import './CardList.css';
 
 export const CardList = (props: TCardsArray) => {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [card, setCard] = useState<TCard | null>(null);
-  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const modalCard = useAppSelector((state) => state.cards.modalCard);
 
   const handleClick = (id: number) => {
-    setLoading(true);
-    setModalOpen(true);
-    openModal(id);
+    dispatch(getStarted());
+    openModalCard(id);
   };
 
-  const openModal = (id: number) => {
+  const openModalCard = (id: number) => {
     fetch(`https://rickandmortyapi.com/api/character/${id}`)
       .then((res) => {
         if (res.ok) {
-          setLoading(false);
           return res.json();
         }
         if (!res.ok || res.status === 404) {
-          setLoading(true);
-          props.error = true;
+          dispatch(getError(true));
+          throw Error(`${res.status}`);
         }
       })
-      .then((data) => setCard(data))
-      .catch((err) => console.error(`Error status: ${err} :(`));
+      .then((data) => {
+        dispatch(openModal(data));
+      })
+      .catch((err) => {
+        console.error(`Error status: ${err} :(`);
+      });
   };
 
   const close = () => {
-    setModalOpen(false);
-    setCard(null);
+    dispatch(openModal(null));
   };
 
   if (props.loaded) {
     return <Spinner />;
   }
+
   return (
     <div className="wrapper">
       {props.cards?.map((item) => {
         return (
           <Fragment key={item.id}>
-            <Modal card={card} open={modalOpen} close={close} loaded={loading} />
+            {modalCard && <Modal card={modalCard} close={close} />}
             <CardsItem onClick={() => handleClick(item.id)} card={item} />
           </Fragment>
         );

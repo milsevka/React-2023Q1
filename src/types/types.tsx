@@ -21,8 +21,6 @@ export type TCard = {
 };
 export type TCardModal = {
   card: null | TCard;
-  open: boolean;
-  loaded: boolean;
   close: () => void;
 };
 

@@ -1,16 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { Dispatch, Fragment, SetStateAction, useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import './Search.css';
+import { getStarted, getError, getSuccess } from '../../store/reducer';
 
-type TSearch = {
-  setCards: Dispatch<SetStateAction<never[]>>;
-  error: Dispatch<SetStateAction<boolean>>;
-  loaded: Dispatch<SetStateAction<boolean>>;
-};
-
-export const Search = (props: TSearch) => {
+export const Search = () => {
+  const dispatch = useDispatch();
   const [search, setSearch] = useState(localStorage.getItem('search') || '');
-  const { setCards } = props;
   const [input, setInput] = useState(search);
 
   const onValueChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -19,6 +15,7 @@ export const Search = (props: TSearch) => {
 
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
+    dispatch(getStarted());
     setInput(search);
     localStorage.setItem('search', search);
   };
@@ -27,18 +24,20 @@ export const Search = (props: TSearch) => {
     fetch(`https://rickandmortyapi.com/api/character/?name=${search}`)
       .then((res) => {
         if (res.ok) {
-          props.error(false);
-          props.loaded(false);
           return res.json();
         }
         if (!res.ok || res.status === 404) {
-          props.loaded(true);
-          props.error(true);
+          dispatch(getError(true));
           throw Error(`${res.status}`);
         }
       })
-      .then((data) => setCards(data.results))
-      .catch((err) => console.error(`Error status: ${err} :(`));
+      .then((data) => {
+        dispatch(getSuccess(data.results));
+        dispatch(getError(false));
+      })
+      .catch((err) => {
+        console.error(`Error status: ${err} :(`);
+      });
   }, [input]);
 
   return (
