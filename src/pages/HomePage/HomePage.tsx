@@ -10,9 +10,7 @@ import { Search } from '../../components/Search/Search';
 import { useAppSelector } from '../../store/store';
 
 export const HomePage = () => {
-  const cards = useAppSelector((state) => state.cards.cards);
-  const error = useAppSelector((state) => state.cards.error);
-  const loaded = useAppSelector((state) => state.cards.isLoading);
+  const { cards, error, isLoading } = useAppSelector((state) => state.cards);
 
   return (
     <>
@@ -20,7 +18,7 @@ export const HomePage = () => {
       <main className="main">
         <Search />
         {error && <p>I am sorry, but there is no such card.</p>}
-        {!error && <CardList cards={cards} loaded={loaded} />}
+        {!error && <CardList cards={cards} loaded={isLoading} />}
       </main>
       <Footer />
     </>

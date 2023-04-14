@@ -2,7 +2,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import './Search.css';
-import { getStarted, getError, getSuccess } from '../../store/reducer';
+import { fetchPending, fetchSuccessful, fetchFailed } from '../../store/reducer';
 
 export const Search = () => {
   const dispatch = useDispatch();
@@ -15,7 +15,7 @@ export const Search = () => {
 
   const handleSubmit = (e: React.FormEvent<EventTarget>) => {
     e.preventDefault();
-    dispatch(getStarted());
+    dispatch(fetchPending());
     setInput(search);
     localStorage.setItem('search', search);
   };
@@ -23,20 +23,14 @@ export const Search = () => {
   useEffect(() => {
     fetch(`https://rickandmortyapi.com/api/character/?name=${search}`)
       .then((res) => {
-        if (res.ok) {
-          return res.json();
-        }
-        if (!res.ok || res.status === 404) {
-          dispatch(getError(true));
-          throw Error(`${res.status}`);
-        }
+        if (res.ok) return res.json();
       })
       .then((data) => {
-        dispatch(getSuccess(data.results));
-        dispatch(getError(false));
+        dispatch(fetchSuccessful(data.results));
+        dispatch(fetchFailed(false));
       })
-      .catch((err) => {
-        console.error(`Error status: ${err} :(`);
+      .catch(() => {
+        dispatch(fetchFailed(true));
       });
   }, [input]);
 

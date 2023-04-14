@@ -19,14 +19,14 @@ export const appReducerSlice = createSlice({
   name: 'cards',
   initialState,
   reducers: {
-    getStarted(state) {
+    fetchPending(state) {
       state.isLoading = true;
     },
-    getSuccess(state, action: PayloadAction<TCard[]>) {
+    fetchSuccessful(state, action: PayloadAction<TCard[]>) {
       state.isLoading = false;
       state.cards = action.payload;
     },
-    getError(state, action: PayloadAction<boolean>) {
+    fetchFailed(state, action: PayloadAction<boolean>) {
       state.isLoading = false;
       state.error = action.payload;
     },
@@ -37,4 +37,4 @@ export const appReducerSlice = createSlice({
   },
 });
 
-export const { getStarted, getSuccess, getError, openModal } = appReducerSlice.actions;
+export const { fetchPending, fetchSuccessful, fetchFailed, openModal } = appReducerSlice.actions;
