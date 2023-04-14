@@ -5,7 +5,9 @@ import '../../App.css';
 import './Form.css';
 import { useForm } from 'react-hook-form';
 import { SubmitHandler } from 'react-hook-form/dist/types';
-import { TCardCat } from '../../types/types';
+import { createdCard } from '../../store/reducer';
+import { useDispatch } from 'react-redux';
+import { useAppSelector } from '../../store/store';
 
 type FormInputs = {
   nameCat: string;
@@ -22,6 +24,8 @@ const regParentName = /^[А-ЯЁA-Z][а-яёa-z]+ [А-ЯЁA-Z][а-яёa-z]+$/g;
 const isBirthdayTrue = (date: string) => Date.now() > new Date(date).getTime();
 
 export const Form = () => {
+  const dispatch = useDispatch();
+  const { createdCards } = useAppSelector((state) => state.cards);
   const {
     register,
     handleSubmit,
@@ -29,7 +33,6 @@ export const Form = () => {
     formState: { errors },
   } = useForm<FormInputs>();
 
-  const [cards, setCards] = useState<TCardCat[]>([]);
   const [creationTitle, setcreationTitle] = useState(false);
 
   const openCreationTitle = () => {
@@ -40,11 +43,23 @@ export const Form = () => {
     }, 1000);
   };
 
-  const onSubmit: SubmitHandler<FormInputs> = (data: FormInputs) => {
+  const file2Base64 = (file: File): Promise<string> => {
+    return new Promise<string>((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result?.toString() || '');
+      reader.onerror = (error) => reject(error);
+    });
+  };
+
+  const onSubmit: SubmitHandler<FormInputs> = async (data: FormInputs) => {
     const { nameParent, birthday, color, gender, nameCat } = data;
-    const photo = data.photo[0];
-    const newCard = { nameCat, nameParent, birthday, color, gender, photo };
-    setCards([...cards, newCard]);
+    const photoAfterBase64 = file2Base64(data.photo[0]);
+    const photoFromForm = await photoAfterBase64.then((value) => {
+      return value;
+    });
+    const newCard = { nameCat, nameParent, birthday, color, gender, photoFromForm };
+    dispatch(createdCard([...createdCards, newCard]));
     openCreationTitle();
   };
 
@@ -173,7 +188,7 @@ export const Form = () => {
       </form>
       {creationTitle && <p className="label-title">Card for the cat created!</p>}
       <ul className="cards-list">
-        {cards.map((card, id) => {
+        {createdCards.map((card, id) => {
           return <FormCard key={id} {...card} />;
         })}
       </ul>

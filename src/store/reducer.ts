@@ -1,4 +1,4 @@
-import { TCard } from '../types/types';
+import { TCard, TCardCat } from '../types/types';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export type TState = {
@@ -6,10 +6,12 @@ export type TState = {
   isLoading: boolean;
   error: boolean;
   modalCard: null | TCard;
+  createdCards: TCardCat[];
 };
 
 const initialState: TState = {
   cards: [],
+  createdCards: [],
   isLoading: true,
   error: false,
   modalCard: null,
@@ -34,7 +36,11 @@ export const appReducerSlice = createSlice({
       state.isLoading = false;
       state.modalCard = action.payload;
     },
+    createdCard(state, action: PayloadAction<TCardCat[]>) {
+      state.createdCards = action.payload;
+    },
   },
 });
 
-export const { fetchPending, fetchSuccessful, fetchFailed, openModal } = appReducerSlice.actions;
+export const { fetchPending, fetchSuccessful, fetchFailed, openModal, createdCard } =
+  appReducerSlice.actions;

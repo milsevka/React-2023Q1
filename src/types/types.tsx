@@ -30,6 +30,6 @@ export type TCardCat = {
   birthday: string;
   color: string;
   gender: string;
-  photo: File;
+  photoFromForm: string;
   checked?: boolean;
 };

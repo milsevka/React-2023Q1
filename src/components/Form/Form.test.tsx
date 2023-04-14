@@ -12,7 +12,7 @@ const card = {
   birthday: '11-02-1999',
   color: 'light',
   gender: 'male',
-  photo: new File([new Blob()], '../../assets/cards/100.jpg', { type: 'image/png' }),
+  photo: '../../assets/cards/100.jpg',
 };
 
 describe('render form', () => {
@@ -55,7 +55,7 @@ describe('render form', () => {
 
   it('render card', () => {
     window.URL.createObjectURL = jest.fn();
-    render(<FormCard {...card} />);
+    render(<FormCard photoFromForm={''} {...card} />);
     expect(screen.getByText(card.nameCat)).toBeInTheDocument();
     expect(screen.getByText(`Gender: ${card.gender}`)).toBeInTheDocument();
     expect(screen.getByText(`Date of birth: ${card.birthday}`)).toBeInTheDocument();
