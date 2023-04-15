@@ -19,6 +19,7 @@ export type TCard = {
     name?: string;
   };
 };
+
 export type TCardModal = {
   card: null | TCard;
   close: () => void;

@@ -7,18 +7,23 @@ import '../../App.css';
 
 import { Search } from '../../components/Search/Search';
 
-import { useAppSelector } from '../../store/store';
+import { RootState, useAppSelector } from '../../store/store';
+
+import { useGetCardsQuery } from '../../store/api';
+import Spinner from '../../components/Spinner/Spinner';
 
 export const HomePage = () => {
-  const { cards, error, isLoading } = useAppSelector((state) => state.cards);
+  const { search } = useAppSelector((state: RootState) => state.cards);
+  const { data: cardsList = [], isLoading, isError } = useGetCardsQuery(search);
 
   return (
     <>
       <Header />
       <main className="main">
         <Search />
-        {error && <p>I am sorry, but there is no such card.</p>}
-        {!error && <CardList cards={cards} loaded={isLoading} />}
+        {isLoading && <Spinner />}
+        {isError && <p>I am sorry, but there is no such card.</p>}
+        {!isError && <CardList cards={cardsList} loaded={isLoading} />}
       </main>
       <Footer />
     </>

@@ -16,7 +16,7 @@ const card = {
 
 describe('render modal', () => {
   it('render modal item', () => {
-    render(<Modal card={card} close={close} />);
+    render(<Modal />);
     expect(screen.getByText(`Species: ${card.species}`)).toBeInTheDocument();
     expect(screen.getByText(`Gender: ${card.gender}`)).toBeInTheDocument();
     expect(screen.getByText(`Location: ${card.location.name}`)).toBeInTheDocument();
@@ -26,6 +26,6 @@ describe('render modal', () => {
   });
 
   it('render spinner', () => {
-    render(<Modal card={card} close={close} />);
+    render(<Modal />);
   });
 });
