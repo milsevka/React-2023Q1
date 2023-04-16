@@ -7,39 +7,49 @@ import { NotFoundPage } from './pages/NotFoundPage/NotFoundPage';
 import { HomePage } from './pages/HomePage/HomePage';
 import { FormPage } from './pages/FormPage/FormPage';
 import App from './App';
+import { Provider } from 'react-redux';
+import store from './store/store';
 
 describe('render pages', () => {
   it('render about page', () => {
     render(
-      <MemoryRouter initialEntries={['/about']}>
-        <AboutPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/about']}>
+          <AboutPage />
+        </MemoryRouter>
+      </Provider>
     );
     expect(screen.getByRole('heading')).toHaveTextContent('About Page');
   });
   it('render not found page', () => {
     render(
-      <MemoryRouter initialEntries={['/404']}>
-        <NotFoundPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/404']}>
+          <NotFoundPage />
+        </MemoryRouter>
+      </Provider>
     );
     expect(screen.getByRole('heading')).toHaveTextContent('Not Found Page');
     expect(screen.getByRole('img')).toBeInTheDocument();
   });
   it('render home page', () => {
     render(
-      <MemoryRouter initialEntries={['/']}>
-        <HomePage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/']}>
+          <HomePage />
+        </MemoryRouter>
+      </Provider>
     );
     expect(screen.getByRole('heading')).toHaveTextContent('Home Page');
   });
 
   it('render form page', () => {
     render(
-      <MemoryRouter initialEntries={['/form']}>
-        <FormPage />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/form']}>
+          <FormPage />
+        </MemoryRouter>
+      </Provider>
     );
     expect(screen.getByRole('heading')).toHaveTextContent('Form Page');
   });
@@ -48,9 +58,11 @@ describe('render pages', () => {
 describe('testing redirect', () => {
   it('redirect to 404', () => {
     render(
-      <MemoryRouter initialEntries={['/fkfkfk']}>
-        <App />
-      </MemoryRouter>
+      <Provider store={store}>
+        <MemoryRouter initialEntries={['/fkfkfk']}>
+          <App />
+        </MemoryRouter>
+      </Provider>
     );
     expect(screen.getByRole('heading')).toHaveTextContent('Not Found Page');
   });

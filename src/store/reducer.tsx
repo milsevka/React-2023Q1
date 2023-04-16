@@ -8,7 +8,7 @@ export type TState = {
   isModalOpen: boolean;
 };
 
-const initialState: TState = {
+export const initialState: TState = {
   createdCards: [],
   search: '',
   idCards: '',
@@ -35,3 +35,5 @@ export const appReducerSlice = createSlice({
 });
 
 export const { createdCard, setSearchNew, setIdCards, openModalCards } = appReducerSlice.actions;
+
+export default appReducerSlice.reducer;
