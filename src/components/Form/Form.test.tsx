@@ -75,17 +75,4 @@ describe('render form', () => {
     expect(screen.getByText(`Color: ${card.color}`)).toBeInTheDocument();
     expect(screen.getByRole('img')).toBeInTheDocument();
   });
-
-  it('should display Card for the cat created! in 1 sec', () => {
-    jest.useFakeTimers();
-    const { queryByText } = render(
-      <Provider store={store}>
-        <Form />
-      </Provider>
-    );
-    act(() => {
-      jest.advanceTimersByTime(1000);
-    });
-    expect(queryByText('Card for the cat created!')).not.toBeInTheDocument();
-  });
 });

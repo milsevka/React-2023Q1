@@ -35,32 +35,17 @@ export const Form = () => {
 
   const [creationTitle, setcreationTitle] = useState(false);
 
-  const openCreationTitle = () => {
-    setcreationTitle(true);
-    setTimeout(() => {
-      setcreationTitle(false);
-      reset();
-    }, 1000);
-  };
-
-  const file2Base64 = (file: File): Promise<string> => {
-    return new Promise<string>((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result?.toString() || '');
-      reader.onerror = (error) => reject(error);
-    });
+  const close = () => {
+    setcreationTitle(false);
   };
 
   const onSubmit: SubmitHandler<FormInputs> = async (data: FormInputs) => {
     const { nameParent, birthday, color, gender, nameCat } = data;
-    const photoAfterBase64 = file2Base64(data.photo[0]);
-    const photoFromForm = await photoAfterBase64.then((value) => {
-      return value;
-    });
+    const photoFromForm = URL.createObjectURL(data.photo[0] as Blob);
     const newCard = { nameCat, nameParent, birthday, color, gender, photoFromForm };
     dispatch(createdCard([...createdCards, newCard]));
-    openCreationTitle();
+    setcreationTitle(true);
+    reset();
   };
 
   return (
@@ -186,7 +171,16 @@ export const Form = () => {
           Create card
         </button>
       </form>
-      {creationTitle && <p className="label-title">Card for the cat created!</p>}
+      {creationTitle && (
+        <div className="created-container" onClick={close}>
+          <div className="created-context" onClick={(e) => e.stopPropagation()}>
+            <p className="label-title">Card for the cat created!</p>
+            <span className="close" onClick={close}>
+              &times;
+            </span>
+          </div>
+        </div>
+      )}
       <ul className="cards-list">
         {createdCards.map((card, id) => {
           return <FormCard key={id} {...card} />;
