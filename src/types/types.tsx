@@ -19,10 +19,9 @@ export type TCard = {
     name?: string;
   };
 };
+
 export type TCardModal = {
   card: null | TCard;
-  open: boolean;
-  loaded: boolean;
   close: () => void;
 };
 
@@ -32,6 +31,6 @@ export type TCardCat = {
   birthday: string;
   color: string;
   gender: string;
-  photo: File;
+  photoFromForm: string;
   checked?: boolean;
 };

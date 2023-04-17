@@ -49,3 +49,34 @@ button:hover {
 .error-title {
     color: rgb(199, 118, 118);
 }
+.created-container {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(189, 181, 181, 0.3);
+}
+.created-context {
+    width: 100%;
+    max-width: 550px;
+    background: rgb(73, 112, 142);
+    position: relative;
+    padding: 20px;
+    max-height: calc(100vh - 40px);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    justify-content: center;
+    align-items: center;
+}
+.close {
+    cursor: pointer;
+    font-size: 2rem;
+    color: #fff53b;
+}

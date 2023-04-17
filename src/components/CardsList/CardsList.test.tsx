@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 
 import { CardList } from './CardList';
+import { Provider } from 'react-redux';
+import store from '../../store/store';
 
 const cardArray = [
   {
@@ -20,7 +22,11 @@ const cardArray = [
 
 describe('render cards', () => {
   it('render card list', () => {
-    const { container } = render(<CardList cards={cardArray} />);
+    const { container } = render(
+      <Provider store={store}>
+        <CardList cards={cardArray} />
+      </Provider>
+    );
     expect(container.getElementsByClassName('cards-item').length).toBe(cardArray.length);
   });
 });
