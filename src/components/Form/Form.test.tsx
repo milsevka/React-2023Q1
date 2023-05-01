@@ -62,7 +62,7 @@ describe('render form', () => {
   });
 
   it('render card', () => {
-    window.URL.createObjectURL = jest.fn();
+    //window.URL.createObjectURL = jest.fn();
     render(
       <Provider store={store}>
         <FormCard {...card} />

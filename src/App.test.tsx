@@ -10,52 +10,52 @@ import App from './App';
 import { Provider } from 'react-redux';
 import store from './store/store';
 
-describe('render pages', () => {
-  it('render about page', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter initialEntries={['/about']}>
-          <AboutPage />
-        </MemoryRouter>
-      </Provider>
-    );
-    expect(screen.getByRole('heading')).toHaveTextContent('About Page');
-  });
-  it('render not found page', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter initialEntries={['/404']}>
-          <NotFoundPage />
-        </MemoryRouter>
-      </Provider>
-    );
-    expect(screen.getByRole('heading')).toHaveTextContent('Not Found Page');
-    expect(screen.getByRole('img')).toBeInTheDocument();
-  });
-  it('render home page', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter initialEntries={['/']}>
-          <HomePage />
-        </MemoryRouter>
-      </Provider>
-    );
-    expect(screen.getByRole('heading')).toHaveTextContent('Home Page');
-  });
-
-  it('render form page', () => {
-    render(
-      <Provider store={store}>
-        <MemoryRouter initialEntries={['/form']}>
-          <FormPage />
-        </MemoryRouter>
-      </Provider>
-    );
-    expect(screen.getByRole('heading')).toHaveTextContent('Form Page');
-  });
+test('render about page', () => {
+  render(
+    <Provider store={store}>
+      <MemoryRouter initialEntries={['/about']}>
+        <AboutPage />
+      </MemoryRouter>
+    </Provider>
+  );
+  expect(screen.getByRole('heading')).toHaveTextContent('About Page');
 });
 
-describe('testing redirect', () => {
+test('render not found page', () => {
+  render(
+    <Provider store={store}>
+      <MemoryRouter initialEntries={['/404']}>
+        <NotFoundPage />
+      </MemoryRouter>
+    </Provider>
+  );
+  expect(screen.getByRole('heading')).toHaveTextContent('Not Found Page');
+  expect(screen.getByRole('img')).toBeInTheDocument();
+});
+
+test('render home page', () => {
+  render(
+    <Provider store={store}>
+      <MemoryRouter initialEntries={['/']}>
+        <HomePage />
+      </MemoryRouter>
+    </Provider>
+  );
+  expect(screen.getByRole('heading')).toHaveTextContent('Home Page');
+});
+
+test('render form page', () => {
+  render(
+    <Provider store={store}>
+      <MemoryRouter initialEntries={['/form']}>
+        <FormPage />
+      </MemoryRouter>
+    </Provider>
+  );
+  expect(screen.getByRole('heading')).toHaveTextContent('Form Page');
+});
+
+test('testing redirect', () => {
   it('redirect to 404', () => {
     render(
       <Provider store={store}>
